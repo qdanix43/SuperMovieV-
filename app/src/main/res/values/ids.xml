@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="menu_search" type="id" />
+    <item name="emptyPlaceholder" type="id" />
+    <item name="recyclerView" type="id" />
+</resources>
