@@ -3,4 +3,6 @@
     <item name="menu_search" type="id" />
     <item name="emptyPlaceholder" type="id" />
     <item name="recyclerView" type="id" />
+    <item name="accederButton" type="id" />
+    <item name="other_view" type="id" />
 </resources>

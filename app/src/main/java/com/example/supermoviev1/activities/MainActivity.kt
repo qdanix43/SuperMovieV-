@@ -10,11 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.superheroes.R
-import com.example.superheroes.databinding.ActivityMainBinding
+import com.example.supermoviev1.R
 import com.example.supermoviev1.adapters.SuperMovieAdapter
 import com.example.supermoviev1.data.SuperMovieServiceApi
 import com.example.supermoviev1.data.Supermovie
+import com.example.supermoviev1.databinding.ActivityMainBinding
 import com.example.supermoviev1.utils.RetrofitProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,43 +40,57 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         binding.progress.visibility = View.GONE
-        binding.recyclerView.visibility = View.GONE
         binding.emptyPlaceholder.visibility = View.VISIBLE
+
+        // Configuración del OnClickListener para el botón "Acceder"
+        binding.accederButton.setOnClickListener {
+            // Llamar a la función para buscar todas las películas
+            searchSupermovie("")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu items from XML
+        if (menuInflater == null || menu == null) {
+            // Handle error, menuInflater or menu is null
+            return false
+        }
         menuInflater.inflate(R.menu.main_menu, menu)
 
-        initSearchView(menu?.findItem(R.id.menu_search))
+        // Initialize search view
+        initSearchView(menu.findItem(R.id.menu_search))
 
         return true
     }
 
+
     private fun initSearchView(searchItem: MenuItem?) {
         if (searchItem != null) {
-            var searchView = searchItem.actionView as SearchView
+            var searchView =
+                (searchItem.actionView as SearchView).also {
 
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    searchSupermovie(query!!)
-                    searchView.clearFocus()
-                    return true
-                }
+                    it.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            searchSupermovie(query!!)
+                            it.clearFocus()
+                            return true
+                        }
 
-                override fun onQueryTextChange(query: String?): Boolean {
-                    return false
+                        override fun onQueryTextChange(query: String?): Boolean {
+                            return false
+                        }
+                    })
                 }
-            })
         }
     }
 
     private fun onItemClickListener(position: Int) {
-        val superhero: Supermovie = supermovieList[position]
+        val superMovieItem: Supermovie = supermovieList[position]
 
         val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_ID, superhero.id)
-        intent.putExtra(DetailActivity.EXTRA_NAME, superhero.name)
-        intent.putExtra(DetailActivity.EXTRA_IMAGE, superhero.image.url)
+        intent.putExtra(DetailActivity.EXTRA_ID, superMovieItem.imdbID)
+        intent.putExtra(DetailActivity.EXTRA_NAME, superMovieItem.title)
+        intent.putExtra(DetailActivity.EXTRA_IMAGE, superMovieItem.poster)
         startActivity(intent)
     }
 
@@ -91,17 +105,27 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 binding.progress.visibility = View.GONE
 
-                if (response.body() != null) {
+                if (response.isSuccessful) {
                     Log.i("HTTP", "respuesta correcta :)")
-                    supermovieList = response.body()?.results.orEmpty()
-                    adapter.updateItems(supermovieList)
+                    val superMovieResponse = response.body()
+                    if (superMovieResponse != null && superMovieResponse.response == "True") {
+                        supermovieList = superMovieResponse.search
+                        adapter.updateItems(supermovieList)
 
-                    if (supermovieList.isNotEmpty()) {
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.emptyPlaceholder.visibility = View.GONE
+                        if (supermovieList.isNotEmpty()) {
+                            binding.recyclerView.visibility = View.VISIBLE
+                            binding.emptyPlaceholder.visibility = View.GONE
+                        } else {
+                            binding.recyclerView.visibility = View.GONE
+                            binding.emptyPlaceholder.visibility = View.VISIBLE
+                        }
                     } else {
-                        binding.recyclerView.visibility = View.GONE
-                        binding.emptyPlaceholder.visibility = View.VISIBLE
+                        Log.i("HTTP", "respuesta con error :(")
+                        Toast.makeText(
+                            this@MainActivity,
+                            "No se encontraron resultados",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 } else {
                     Log.i("HTTP", "respuesta erronea :(")

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SuperMovieV1</string>
-    <string name="menu_search" />
-    <string name="empty_supermovie_title">No Hay Peliculas Disponibles De Marvel</string>
+
+    <string name="menu_search">Search</string>
+    <string name="empty_supermovie_title">No Hay Peliculas Disponibles</string>
     <string name="empty_supermovie_advice">Pulsa La Lupa Para Buscar Una Pelicula De Marvel</string>
 </resources>

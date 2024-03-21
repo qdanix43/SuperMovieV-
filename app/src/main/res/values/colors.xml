@@ -6,4 +6,5 @@
     <color name="grey">#8C8C8C</color>
     <color name="good_color" />
     <color name="evil_color" />
+    <color name="transparent_black">#000000</color>
 </resources>
