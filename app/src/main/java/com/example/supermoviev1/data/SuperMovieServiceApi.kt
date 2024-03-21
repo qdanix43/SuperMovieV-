@@ -1,16 +1,19 @@
 package com.example.supermoviev1.data
 
-import okhttp3.Response
+import com.example.supermoviev1.utils.Constants
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-
-
+import retrofit2.http.Query
 
 interface SuperMovieServiceApi {
 
-    @GET("search/{name}")
-    suspend fun searchByName(@Path("name") query:String) : retrofit2.Response<SuperMovieResponse>
+    @GET("/?apikey=${Constants.API_ACCESS_TOKEN}")
+    suspend fun searchByName(@Query("s") query: String): Response<SuperMovieResponse>
 
     @GET("{id}")
     suspend fun findById(@Path("id") identifier: String): Response<Supermovie>
 
+    @GET("movies") // Endpoint para obtener todas las películas
+    suspend fun getAllMovies(): Response<List<Supermovie>>
+}

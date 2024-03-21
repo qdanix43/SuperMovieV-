@@ -6,20 +6,23 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 
 
-class SuperMovieResponse (
-    @SerializedName("response") val response:String,
-    @SerializedName("results-for") val resultsFor:String,
-    @SerializedName("results") val results:List<Supermovie>
+
+
+class SuperMovieResponse(
+    @SerializedName("Search") val search: List<Supermovie>,
+    @SerializedName("totalResults") val totalResults: String,
+    @SerializedName("Response") val response: String
+)
+
+class Supermovie(
+    @SerializedName("Title") val title: String,
+    @SerializedName("Year") val year: String,
+    @SerializedName("imdbID") val imdbID: String,
+    @SerializedName("Type") val type: String,
+    @SerializedName("Poster") val poster: String
 ) {
+
 }
-
-class Supermovie (
-    @SerializedName("id") val id:String,
-    @SerializedName("name") val name:String,
-    @SerializedName("biography") val biography:Biography,
-    @SerializedName("image") val image:Image
-) { }
-
 
 
 class Biography (
@@ -27,7 +30,7 @@ class Biography (
     @SerializedName("place-of-birth") val placeOfBirth:String,
     @SerializedName("alignment") val alignment:String,
     @SerializedName("publisher") val publisher:String
-) { }¡¡
+) { }
 
 
 

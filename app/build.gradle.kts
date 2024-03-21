@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.superheroes"
+    namespace = "com.example.supermoviev1"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.superheroes"
+        applicationId = "com.example.supermoviev1"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
