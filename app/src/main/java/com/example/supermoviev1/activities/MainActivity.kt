@@ -19,6 +19,7 @@ import com.example.supermoviev1.utils.RetrofitProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -100,41 +101,45 @@ class MainActivity : AppCompatActivity() {
         val service: SuperMovieServiceApi = RetrofitProvider.getRetrofit()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.searchByName(query)
+            try {
+                val response = service.searchByName(query)
 
-            runOnUiThread {
-                binding.progress.visibility = View.GONE
+                runOnUiThread {
+                    binding.progress.visibility = View.GONE
 
-                if (response.isSuccessful) {
-                    Log.i("HTTP", "respuesta correcta :)")
-                    val superMovieResponse = response.body()
-                    if (superMovieResponse != null && superMovieResponse.response == "True") {
-                        supermovieList = superMovieResponse.search
-                        adapter.updateItems(supermovieList)
+                    if (response.isSuccessful) {
+                        Log.i("HTTP", "respuesta correcta :)")
+                        val superMovieResponse = response.body()
+                        if (superMovieResponse != null && superMovieResponse.response == "True") {
+                            supermovieList = superMovieResponse.search
+                            adapter.updateItems(supermovieList)
 
-                        if (supermovieList.isNotEmpty()) {
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.emptyPlaceholder.visibility = View.GONE
+                            if (supermovieList.isNotEmpty()) {
+                                binding.recyclerView.visibility = View.VISIBLE
+                                binding.emptyPlaceholder.visibility = View.GONE
+                            } else {
+                                binding.recyclerView.visibility = View.GONE
+                                binding.emptyPlaceholder.visibility = View.VISIBLE
+                            }
                         } else {
-                            binding.recyclerView.visibility = View.GONE
-                            binding.emptyPlaceholder.visibility = View.VISIBLE
+                            Log.i("HTTP", "respuesta con error :(")
+                            Toast.makeText(
+                                this@MainActivity,
+                                "No se encontraron resultados",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     } else {
-                        Log.i("HTTP", "respuesta con error :(")
+                        Log.i("HTTP", "respuesta erronea :(")
                         Toast.makeText(
                             this@MainActivity,
-                            "No se encontraron resultados",
+                            "Hubo un error inesperado, vuelva a intentarlo más tarde",
                             Toast.LENGTH_LONG
                         ).show()
                     }
-                } else {
-                    Log.i("HTTP", "respuesta erronea :(")
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Hubo un error inesperado, vuelva a intentarlo más tarde",
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

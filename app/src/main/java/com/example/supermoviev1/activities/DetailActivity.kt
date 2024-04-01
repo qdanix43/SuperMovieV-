@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+import java.lang.Exception
 
 
 class DetailActivity : AppCompatActivity() {
@@ -89,17 +89,21 @@ class DetailActivity : AppCompatActivity() {
         val service: SuperMovieServiceApi = RetrofitProvider.getRetrofit()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.findById(id)
+            try {
+                val response = service.findById(id)
 
-            runOnUiThread {
-                binding.content.progress.visibility = View.GONE
-                if (response.isSuccessful) {
-                    Log.i("HTTP", "respuesta correcta :)")
-                    supermovie = response.body()!!
-                    loadData()
-                } else {
-                    Log.i("HTTP", "respuesta erronea :(")
+                runOnUiThread {
+                    binding.content.progress.visibility = View.GONE
+                    if (response.isSuccessful) {
+                        Log.i("HTTP", "respuesta correcta :)")
+                        supermovie = response.body()!!
+                        loadData()
+                    } else {
+                        Log.i("HTTP", "respuesta erronea :(")
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
