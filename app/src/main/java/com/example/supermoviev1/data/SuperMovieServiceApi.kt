@@ -11,8 +11,8 @@ interface SuperMovieServiceApi {
     @GET("/?apikey=${Constants.API_ACCESS_TOKEN}")
     suspend fun searchByName(@Query("s") query: String): Response<SuperMovieResponse>
 
-    @GET("{id}")
-    suspend fun findById(@Path("id") identifier: String): Response<Supermovie>
+    @GET("/?apikey=${Constants.API_ACCESS_TOKEN}")
+    suspend fun findById(@Query("i") identifier: String): Response<Supermovie>
 
     @GET("movies") // Endpoint para obtener todas las películas
     suspend fun getAllMovies(): Response<List<Supermovie>>

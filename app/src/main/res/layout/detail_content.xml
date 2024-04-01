@@ -2,30 +2,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="25dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="441dp"
         android:orientation="vertical"
         android:padding="8dp">
 
         <!-- Título -->
         <TextView
-            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Título:"
             android:textSize="18sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!-- Año -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Año:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/yearTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Año:"
+            android:text="Cargando..."
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -40,61 +54,102 @@
             tools:src="@drawable/poster_placeholder" />
 
         <!-- Sinopsis -->
+
+        <!-- Duración -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Sinopsis:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/synopsisTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sinopsis:"
+            android:layout_height="51dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Cargando..."
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+            android:textStyle="bold" />
 
-        <!-- Duración -->
         <TextView
-            android:id="@+id/durationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Duración:"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <!-- Director -->
         <TextView
-            android:id="@+id/directorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Director:"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/directorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <!-- Género -->
         <TextView
-            android:id="@+id/genreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Género:"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- País -->
         <TextView
-            android:id="@+id/countryTextView"
+            android:id="@+id/genreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="País:"
+            android:text="Cargando..."
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!-- País -->
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="País:"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/countryTextView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="555dp">
+
+            <ProgressBar
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ProgressBar
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center" />
-    </FrameLayout>
 </FrameLayout>

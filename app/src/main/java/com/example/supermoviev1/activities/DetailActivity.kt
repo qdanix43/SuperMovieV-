@@ -65,6 +65,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun loadData() {
         binding.content.titleTextView.text = supermovie.title
+        binding.content.yearTextView.text = supermovie.year
+        binding.content. synopsisTextView.text = supermovie.synopsis
+        binding.content. durationTextView.text = supermovie.log
+        binding.content. directorTextView.text = supermovie.director
+        binding.content. genreTextView.text = supermovie.genre
+        binding.content. countryTextView.text = supermovie.country
+
+
+
         // If you want to display other properties, make sure they are defined in the Supermovie class
         // binding.content.publisherTextView.text = supermovie.publisher
         // val alignmentColor = if (supermovie.alignment == "good") {

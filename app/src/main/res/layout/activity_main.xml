@@ -50,21 +50,8 @@
             android:layout_gravity="center"
             android:indeterminateTint="@color/black" />
 
-        <!-- Botón de Acceder -->
-        <Button
-            android:id="@+id/accederButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Acceder"
-            android:layout_gravity="center"/>
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/Button"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:text="Button" />
 
 </FrameLayout>

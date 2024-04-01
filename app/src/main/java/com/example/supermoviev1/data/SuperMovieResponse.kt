@@ -4,14 +4,13 @@ import com.google.gson.TypeAdapter
 import com.google.gson.annotations.SerializedName
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
-
-
+import java.time.Duration
 
 
 class SuperMovieResponse(
     @SerializedName("Search") val search: List<Supermovie>,
     @SerializedName("totalResults") val totalResults: String,
-    @SerializedName("Response") val response: String
+    @SerializedName("Response") val response: String,
 )
 
 class Supermovie(
@@ -19,23 +18,21 @@ class Supermovie(
     @SerializedName("Year") val year: String,
     @SerializedName("imdbID") val imdbID: String,
     @SerializedName("Type") val type: String,
-    @SerializedName("Poster") val poster: String
-) {
+    @SerializedName("Poster") val poster: String,
+    @SerializedName("Plot") val synopsis: String,
+    @SerializedName("Runtime") val log: String,
+    @SerializedName("Director") val director: String,
+    @SerializedName("Genre") val genre: String,
+    @SerializedName("Country") val country: String,
+
+
+    ) {
 
 }
 
 
-class Biography (
-    @SerializedName("full-name") val realName:String,
-    @SerializedName("place-of-birth") val placeOfBirth:String,
-    @SerializedName("alignment") val alignment:String,
-    @SerializedName("publisher") val publisher:String
-) { }
-
-
-
 class Image (
-    @SerializedName("url") val url:String
+    @SerializedName("url") val url:String,
 ) { }
 
 

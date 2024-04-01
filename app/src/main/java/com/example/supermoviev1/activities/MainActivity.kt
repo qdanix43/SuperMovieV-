@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
         binding.progress.visibility = View.GONE
         binding.emptyPlaceholder.visibility = View.VISIBLE
 
-        // Configuración del OnClickListener para el botón "Acceder"
+        /*// Configuración del OnClickListener para el botón "Acceder"
         binding.accederButton.setOnClickListener {
             // Llamar a la función para buscar todas las películas
             searchSupermovie("")
-        }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
